@@ -9,3 +9,4 @@ Analyse réseau wifi ou d'un point d'accès de relaie de connexion, uniquement c
 # Requierement:
 > Lancement en mode administrateur, si il y a lancement en utilisateur un mot de passe root sera demander.
 > L'installation du paquet "tcpdump".
+> L'installation du module "tkinter" pour python.
