@@ -195,7 +195,7 @@ def info_window():
 	
 	""" Texte qui affiche les infos du software """
 	Label(info, text="Program Created by 4N4RCHY and z3r0.\n Version_1.0-b").pack(side=TOP, padx=10, pady=5)
-	Label(info, text="Programer:\n\n 4N4RCHY <anarchy.dar97@gmail.com>;\n z3r0 <mail>;").pack(side=TOP, padx=5, pady=5)
+	Label(info, text="Programer:\n\n 4N4RCHY <anarchy.dark97@gmail.com>;\n z3r0 <mail>;").pack(side=TOP, padx=5, pady=5)
 	Label(info, text="(c) 2009 - Copyright by DevilHatSec.").pack(side=BOTTOM, padx=10, pady=5)
 	
 	info.mainloop()
