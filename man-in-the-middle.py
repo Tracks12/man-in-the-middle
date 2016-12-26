@@ -12,7 +12,7 @@ import sys
 import warnings
 from Tkinter import *
 
-op = 2
+op = 2 # Variable de choix d'interface d'analyse (eth0/wlan0)
 
 """ Définition de valeur pour les couleur """
 class color:
