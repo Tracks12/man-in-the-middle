@@ -1,4 +1,4 @@
-# man-in-the-middle
+# man-in-the-middle.py
 Analyse réseau wifi ou d'un point d'accès de relaie de connexion, uniquement compatible sous Unix.
 
 # Info:
