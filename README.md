@@ -1,5 +1,5 @@
 # man-in-the-middle.py
-Analyse réseau wifi ou d'un point d'accès de relaie de connexion, uniquement compatible sous Unix.
+Analyse réseau wifi ou d'un relaie de connexion, uniquement compatible sous Unix.
 
 # Info:
 > 2 mode de lancement, graphique ou en ligne de commande.
