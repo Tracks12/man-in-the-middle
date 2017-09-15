@@ -71,26 +71,13 @@ def console():
 		print(color.GREEN + "\t1. SAMPLE\n\t2. ALL\n" + color.END + color.YELLOW + "\t3. FTP\n\t4. HTTP\n\t5. HTTPS\n\t6. SMTP\n\t7. POP3\n\t8. HELP\n\t9. MORE\n\t10. INTERFACE\n" + color.END + color.RED + "\t0. QUIT\n" + color.END)
 		choice = input("> Select Dump mod: ")
 		
-		if(choice == 1):
-			dump_list()
-		
-		if(choice == 2):
-			dump_all()
-		
-		if(choice == 3):
-			dump_ftp()
-		
-		if(choice == 4):
-			dump_http()
-		
-		if(choice == 5):
-			dump_https()
-		
-		if(choice == 6):
-			dump_smtp()
-		
-		if(choice == 7):
-			dump_pop3()
+		if(choice == 1): dump_list()
+		if(choice == 2): dump_all()
+		if(choice == 3): dump_ftp()
+		if(choice == 4): dump_http()
+		if(choice == 5): dump_https()
+		if(choice == 6): dump_smtp()
+		if(choice == 7): dump_pop3()
 		
 		if(choice == 8):
 			print("> " + color.B_YELLOW + "Get Help_" + color.END)
@@ -105,23 +92,12 @@ def console():
 			print("Interface: \n\n" + color.GREEN + "\t1. eth0\n\t2. wlan0\n" + color.END)
 			interface = input("> Select interface: ")
 			
-			if(interface == 1):
-				print("> " + color.YELLOW + "Interface: eth0_" + color.END)
-			
-			if(interface == 2):
-				print("> " + color.YELLOW + "Interface: wlan0_" + color.END)
-			
-			if(interface < 1):
-				print("> " + color.RED + "Interface: Not Defined_" + color.END)
-				interface = 1
-			
-			if(interface > 2):
-				print("> " + color.RED + "Interface: Not Defined_" + color.END)
-				interface = 2
+			if(interface == 1): print("> " + color.YELLOW + "Interface: eth0_" + color.END)
+			if(interface == 2): print("> " + color.YELLOW + "Interface: wlan0_" + color.END)
+			if(interface < 1): print("> " + color.RED + "Interface: Not Defined_" + color.END); interface = 1
+			if(interface > 2): print("> " + color.RED + "Interface: Not Defined_" + color.END); interface = 2
 		
-		if(choice == 0):
-			print("> " + color.B_RED + "Quitting_" + color.END)
-			exit(1)
+		if(choice == 0): print("> " + color.B_RED + "Quitting_" + color.END); exit(1)
 
 """ Mode Fenêtre graphique du program """
 def window():
@@ -204,95 +180,63 @@ def info_window():
 def dump_list():
 	print("> " + color.GREEN + "Analyse All Ports with tcpdump [SAMPLE MOD]_" + color.END)
 	
-	if(op == 1):
-		os.system('sudo tcpdump')
-	
-	if(op == 2):
-		os.system('sudo tcpdump -i wlan0')
+	if(op == 1): os.system('sudo tcpdump')
+	if(op == 2): os.system('sudo tcpdump -i wlan0')
 
 """ Command: dump_all """
 def dump_all():
 	print("> " + color.GREEN + "Analyse All Ports with tcpdump_" + color.END)
 	
-	if(op == 1):
-		os.system('sudo tcpdump -s 0 -A')
-	
-	if(op == 2):
-		os.system('sudo tcpdump -s 0 -A -i wlan0')
+	if(op == 1): os.system('sudo tcpdump -s 0 -A')
+	if(op == 2): os.system('sudo tcpdump -s 0 -A -i wlan0')
 
 """ Command: dump_ftp """
 def dump_ftp():
 	print("> " + color.YELLOW + "Analyse FTP Port with tcpdump_" + color.END)
 	
-	if(op == 1):
-		os.system('sudo tcpdump -s 0 -A port ftp')
-	
-	if(op == 2):
-		os.system('sudo tcpdump -s 0 -A port ftp -i wlan0')
+	if(op == 1): os.system('sudo tcpdump -s 0 -A port ftp')
+	if(op == 2): os.system('sudo tcpdump -s 0 -A port ftp -i wlan0')
 
 """ Command: dump_http """
 def dump_http():
 	print("> " + color.YELLOW + "Analyse HTTP Port with tcpdump_" + color.END)
 	
-	if(op == 1):
-                os.system('sudo tcpdump -s 0 -A port http')
-	
-        if(op == 2):
-                os.system('sudo tcpdump -s 0 -A port http -i wlan0')
+	if(op == 1): os.system('sudo tcpdump -s 0 -A port http')
+        if(op == 2): os.system('sudo tcpdump -s 0 -A port http -i wlan0')
 
 """ Command: dump_https """
 def dump_https():
 	print("> " + color.YELLOW + "Analyse HTTPS Port with tcpdump_" + color.END)
 	
-	if(op == 1):
-                os.system('sudo tcpdump -s 0 -A port https')
-	
-        if(op == 2):
-                os.system('sudo tcpdump -s 0 -A port https -i wlan0')
+	if(op == 1): os.system('sudo tcpdump -s 0 -A port https')
+        if(op == 2): os.system('sudo tcpdump -s 0 -A port https -i wlan0')
 
 """ Command: dump_smtp """
 def dump_smtp():
 	print("> " + color.YELLOW + "Analyse SMTP Port with tcpdump_" + color.END)
 	
-	if(op == 1):
-                os.system('sudo tcpdump -s 0 -A port smtp')
-	
-        if(op == 2):
-                os.system('sudo tcpdump -s 0 -A port smtp -i wlan0')
+	if(op == 1): os.system('sudo tcpdump -s 0 -A port smtp')
+        if(op == 2): os.system('sudo tcpdump -s 0 -A port smtp -i wlan0')
 
 """ Command: dump_pop3 """
 def dump_pop3():
 	print("> " + color.YELLOW + "Analyse POP3 Port width tcpdump_" + color.END)
 	
-	if(op == 1):
-                os.system('sudo tcpdump -s 0 -A port pop3')
-	
-        if(op == 2):
-                os.system('sudo tcpdump -s 0 -A port pop3 -i wlan0')
+	if(op == 1): os.system('sudo tcpdump -s 0 -A port pop3')
+        if(op == 2): os.system('sudo tcpdump -s 0 -A port pop3 -i wlan0')
 
 """ Command: Quit """
-def quit():
-	print("> " + color.B_RED + "Quitting_" + color.END)
-	exit(1)
+def quit(): print("> " + color.B_RED + "Quitting_" + color.END); exit(1)
 
 """ Selection des mods de lancement """
 def program():
 	print("> " + color.B_GREEN + "Launching_\n" + color.END + "> Please, select start mod:\n\n\t1. console mod\n\t2. graphique mod\n\t0. quit\n")
 	choice = input(">>> Mod: ")
 	
-	if(choice == 1):
-		console()
-	
-	if(choice == 2):
-		window()
-	
-	if(choice == 0):
-		print("> " + color.B_RED + "Quitting_" + color.END)
-		exit(1)
-	
-	else:
-		print("> " + color.B_YELLOW + "Uknown Mod_" + color.END)
-		program()
+	if(choice == 1): console()
+	if(choice == 2): window()
+	if(choice == 0): print("> " + color.B_RED + "Quitting_" + color.END); exit(1)
+	else: print("> " + color.B_YELLOW + "Uknown Mod_" + color.END); program()
 
 program()
 
