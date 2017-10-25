@@ -7,12 +7,12 @@
 #  Program >>> man-in-the-middle.py
 # ----------------------------------
 
-import os
-import sys
+import os, sys
 import warnings
 from Tkinter import *
 
-op = 2 # Variable de choix d'interface d'analyse (eth0/wlan0)
+""" Variable de séléction d'interface réseau """
+op = 2 # [ 1. eth0 | 2. wlan0 ]
 
 """ Définition de valeur pour les couleur """
 class color:
@@ -72,32 +72,38 @@ def console():
 		choice = input("> Select Dump mod: ")
 		
 		if(choice == 1): dump_list()
-		if(choice == 2): dump_all()
-		if(choice == 3): dump_ftp()
-		if(choice == 4): dump_http()
-		if(choice == 5): dump_https()
-		if(choice == 6): dump_smtp()
-		if(choice == 7): dump_pop3()
-		
-		if(choice == 8):
+		elif(choice == 2): dump_all()
+		elif(choice == 3): dump_ftp()
+		elif(choice == 4): dump_http()
+		elif(choice == 5): dump_https()
+		elif(choice == 6): dump_smtp()
+		elif(choice == 7): dump_pop3()
+		elif(choice == 8):
 			print("> " + color.B_YELLOW + "Get Help_" + color.END)
 			print("Aide:\t\t\t\t\n[SAMPLE], lance tout simplement tcpdump\n[ALL], lance la commande traduit en ascii sur tout les ports\n[FTP], lance la commande que sur le port FTP\n[HTTP], lance la commande que sur le port HTTP\n[HTTPS], lance la commande que sur le port HTTPS\n[SMTP], lance la commande que sur le port SMTP\n[POP3], lance la commande que sur le port POP3\n[INTERFACE], permet de sélectionner l'interface réseau à utiliser\n\nATTENTION: Il se peut que le scan HTTPS soit illisible à cause de la clé de cryptage.\nCe Software est compatible uniquement sous linux.")
 		
-		if(choice == 9):
+		elif(choice == 9):
 			print("> " + color.B_YELLOW + "Get More Info_" + color.END)
 			print("More:\n\n\tProgram Created by 4N4RCHY and z3r0.\n\tVersion_1.0-b\n\n\tProgramer:\n\t\t4N4RCHY <anarchy.dar97@gmail.com>;\n\t\tz3r0 <mail>;")
 		
-		if(choice == 10):
+		elif(choice == 10):
 			print("> " + color.B_YELLOW + "Choose interface_" + color.END)
 			print("Interface: \n\n" + color.GREEN + "\t1. eth0\n\t2. wlan0\n" + color.END)
 			interface = input("> Select interface: ")
 			
 			if(interface == 1): print("> " + color.YELLOW + "Interface: eth0_" + color.END)
-			if(interface == 2): print("> " + color.YELLOW + "Interface: wlan0_" + color.END)
-			if(interface < 1): print("> " + color.RED + "Interface: Not Defined_" + color.END); interface = 1
-			if(interface > 2): print("> " + color.RED + "Interface: Not Defined_" + color.END); interface = 2
+			elif(interface == 2): print("> " + color.YELLOW + "Interface: wlan0_" + color.END)
+			elif(interface < 1):
+				print("> " + color.RED + "Interface: Not Defined_" + color.END)
+				interface = 1
+			
+			elif(interface > 2):
+				print("> " + color.RED + "Interface: Not Defined_" + color.END)
+				interface = 2
 		
-		if(choice == 0): print("> " + color.B_RED + "Quitting_" + color.END); exit(1)
+		elif(choice == 0):
+			print("> " + color.B_RED + "Quitting_" + color.END)
+			exit(1)
 
 """ Mode Fenêtre graphique du program """
 def window():
@@ -124,7 +130,7 @@ def window():
 	
 	""" Panneau de Commande """
 	panel = Frame(tcpdump, borderwidth=1, relief=GROOVE)
-	panel.pack(side=TOP, padx=4, pady=4)
+	panel.pack(side=TOP, padx=8, pady=8)
 	Label(panel, text="TCP Dump Command PORT").pack(padx=5, pady=2)
 	
 	""" Bouttons de commandes contenu dans le Panneau de Commande """
@@ -138,7 +144,7 @@ def window():
 	
 	""" Panneau pied de fenêtre """
 	bot_panel = Frame(tcpdump, borderwidth=1, relief=GROOVE)
-	bot_panel.pack(side=TOP, padx=4, pady=4)
+	bot_panel.pack(side=TOP, padx=8, pady=8)
 	Label(bot_panel, text="Quit TCP Dump").pack(padx=5, pady=2)
 	
 	""" Bouttons de commandes contenu dans le Panneau pied """
@@ -148,6 +154,7 @@ def window():
 	
 	tcpdump.config(menu=menubar)
 	tcpdump.mainloop()
+	quit()
 
 """ Fenêtre secondaire "Aide" """
 def help_window():
@@ -171,7 +178,7 @@ def info_window():
 	
 	""" Texte qui affiche les infos du software """
 	Label(info, text="Program Created by 4N4RCHY and z3r0.\n Version_1.0-b").pack(side=TOP, padx=10, pady=5)
-	Label(info, text="Programer:\n\n 4N4RCHY <anarchy.dark97@gmail.com>;\n z3r0 <mail>;").pack(side=TOP, padx=5, pady=5)
+	Label(info, text="Programer:\n\n 4N4RCHY <anarchy.dar97@gmail.com>;\n z3r0 <mail>;").pack(side=TOP, padx=5, pady=5)
 	Label(info, text="(c) 2009 - Copyright by DevilHatSec.").pack(side=BOTTOM, padx=10, pady=5)
 	
 	info.mainloop()
@@ -181,52 +188,54 @@ def dump_list():
 	print("> " + color.GREEN + "Analyse All Ports with tcpdump [SAMPLE MOD]_" + color.END)
 	
 	if(op == 1): os.system('sudo tcpdump')
-	if(op == 2): os.system('sudo tcpdump -i wlan0')
+	elif(op == 2): os.system('sudo tcpdump -i wlan0')
 
 """ Command: dump_all """
 def dump_all():
 	print("> " + color.GREEN + "Analyse All Ports with tcpdump_" + color.END)
 	
 	if(op == 1): os.system('sudo tcpdump -s 0 -A')
-	if(op == 2): os.system('sudo tcpdump -s 0 -A -i wlan0')
+	elif(op == 2): os.system('sudo tcpdump -s 0 -A -i wlan0')
 
 """ Command: dump_ftp """
 def dump_ftp():
 	print("> " + color.YELLOW + "Analyse FTP Port with tcpdump_" + color.END)
 	
 	if(op == 1): os.system('sudo tcpdump -s 0 -A port ftp')
-	if(op == 2): os.system('sudo tcpdump -s 0 -A port ftp -i wlan0')
+	elif(op == 2): os.system('sudo tcpdump -s 0 -A port ftp -i wlan0')
 
 """ Command: dump_http """
 def dump_http():
 	print("> " + color.YELLOW + "Analyse HTTP Port with tcpdump_" + color.END)
 	
 	if(op == 1): os.system('sudo tcpdump -s 0 -A port http')
-        if(op == 2): os.system('sudo tcpdump -s 0 -A port http -i wlan0')
+	elif(op == 2): os.system('sudo tcpdump -s 0 -A port http -i wlan0')
 
 """ Command: dump_https """
 def dump_https():
 	print("> " + color.YELLOW + "Analyse HTTPS Port with tcpdump_" + color.END)
 	
 	if(op == 1): os.system('sudo tcpdump -s 0 -A port https')
-        if(op == 2): os.system('sudo tcpdump -s 0 -A port https -i wlan0')
+	elif(op == 2): os.system('sudo tcpdump -s 0 -A port https -i wlan0')
 
 """ Command: dump_smtp """
 def dump_smtp():
 	print("> " + color.YELLOW + "Analyse SMTP Port with tcpdump_" + color.END)
 	
 	if(op == 1): os.system('sudo tcpdump -s 0 -A port smtp')
-        if(op == 2): os.system('sudo tcpdump -s 0 -A port smtp -i wlan0')
+	elif(op == 2): os.system('sudo tcpdump -s 0 -A port smtp -i wlan0')
 
 """ Command: dump_pop3 """
 def dump_pop3():
 	print("> " + color.YELLOW + "Analyse POP3 Port width tcpdump_" + color.END)
 	
 	if(op == 1): os.system('sudo tcpdump -s 0 -A port pop3')
-        if(op == 2): os.system('sudo tcpdump -s 0 -A port pop3 -i wlan0')
+	elif(op == 2): os.system('sudo tcpdump -s 0 -A port pop3 -i wlan0')
 
 """ Command: Quit """
-def quit(): print("> " + color.B_RED + "Quitting_" + color.END); exit(1)
+def quit():
+	print("> " + color.B_RED + "Quitting_" + color.END)
+	exit(1)
 
 """ Selection des mods de lancement """
 def program():
@@ -234,9 +243,14 @@ def program():
 	choice = input(">>> Mod: ")
 	
 	if(choice == 1): console()
-	if(choice == 2): window()
-	if(choice == 0): print("> " + color.B_RED + "Quitting_" + color.END); exit(1)
-	else: print("> " + color.B_YELLOW + "Uknown Mod_" + color.END); program()
+	elif(choice == 2): window()
+	elif(choice == 0):
+		print("> " + color.B_RED + "Quitting_" + color.END)
+		exit(1)
+	
+	else:
+		print("> " + color.B_YELLOW + "Uknown Mod_" + color.END)
+		program()
 
 program()
 
