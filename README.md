@@ -6,7 +6,14 @@ Analyse réseau wifi ou d'un relaie de connexion, uniquement compatible sous Uni
 > Programme faisant référence à la commande "tcpdump" en plus alléger.
 > Rendu en ASCII et HEX.
 
-# Requierement:
+exmple de lancement:
+> Graphique
+<img src='https://raw.githubusercontent.com/Tracks12/man-in-the-middle/master/screenshot_41.png' />
+
+> Ligne de commande
+<img src='https://raw.githubusercontent.com/Tracks12/man-in-the-middle/master/screenshot_42.png' />
+
+# Pré-requis:
 > Lancement en mode administrateur, si il y a lancement en utilisateur un mot de passe root sera demander.
-> L'installation du paquet "tcpdump".
-> L'installation du module "tkinter" pour python.
+<br />L'installation du paquet "tcpdump".
+<br /> L'installation du module "tkinter" pour python.
