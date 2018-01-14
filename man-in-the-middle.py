@@ -12,7 +12,10 @@ import warnings
 from Tkinter import *
 
 """ Variable de séléction d'interface réseau """
-op = 2 # [ 1. eth0 | 2. wlan0 ]
+op = 0 # [ 0. eth0 | 1. wlan0 ]
+
+if(op): op = " -i wlan0"
+else: op = ""
 
 """ Définition de valeur pour les couleur """
 class color:
@@ -88,18 +91,17 @@ def console():
 		
 		elif(choice == 10):
 			print("> " + color.B_YELLOW + "Choose interface_" + color.END)
-			print("Interface: \n\n" + color.GREEN + "\t1. eth0\n\t2. wlan0\n" + color.END)
+			print("Interface: \n\n" + color.GREEN + "\t0. eth0\n\t1. wlan0\n" + color.END)
 			interface = input("> Select interface: ")
 			
-			if(interface == 1): print("> " + color.YELLOW + "Interface: eth0_" + color.END)
-			elif(interface == 2): print("> " + color.YELLOW + "Interface: wlan0_" + color.END)
-			elif(interface < 1):
-				print("> " + color.RED + "Interface: Not Defined_" + color.END)
-				interface = 1
-			
-			elif(interface > 2):
-				print("> " + color.RED + "Interface: Not Defined_" + color.END)
-				interface = 2
+			if(interface == 0):
+				print("> " + color.YELLOW + "Interface: eth0_" + color.END)
+				op = ""
+			elif(interface == 1):
+				print("> " + color.YELLOW + "Interface: wlan0_" + color.END)
+				op = " -i wlan0"
+			elif(interface < 0): print("> " + color.RED + "Interface: Not Defined_" + color.END)
+			elif(interface > 1): print("> " + color.RED + "Interface: Not Defined_" + color.END)
 		
 		elif(choice == 0):
 			print("> " + color.B_RED + "Quitting_" + color.END)
@@ -107,8 +109,6 @@ def console():
 
 """ Mode Fenêtre graphique du program """
 def window():
-	interface = 1
-	
 	print("> " + color.B_GREEN + "Initiate GRAPH mod_" + color.END)
 	tcpdump = Tk()
 	tcpdump.title('TCP Dump - by DHS Team {DevilHatSec}')
@@ -186,51 +186,37 @@ def info_window():
 """ Command: dump_list """
 def dump_list():
 	print("> " + color.GREEN + "Analyse All Ports with tcpdump [SAMPLE MOD]_" + color.END)
-	
-	if(op == 1): os.system('sudo tcpdump')
-	elif(op == 2): os.system('sudo tcpdump -i wlan0')
+	os.system('sudo tcpdump' + op)
 
 """ Command: dump_all """
 def dump_all():
 	print("> " + color.GREEN + "Analyse All Ports with tcpdump_" + color.END)
-	
-	if(op == 1): os.system('sudo tcpdump -s 0 -A')
-	elif(op == 2): os.system('sudo tcpdump -s 0 -A -i wlan0')
+	os.system('sudo tcpdump -s 0 -A' + op)
 
 """ Command: dump_ftp """
 def dump_ftp():
 	print("> " + color.YELLOW + "Analyse FTP Port with tcpdump_" + color.END)
-	
-	if(op == 1): os.system('sudo tcpdump -s 0 -A port ftp')
-	elif(op == 2): os.system('sudo tcpdump -s 0 -A port ftp -i wlan0')
+	os.system('sudo tcpdump -s 0 -A port ftp' + op)
 
 """ Command: dump_http """
 def dump_http():
 	print("> " + color.YELLOW + "Analyse HTTP Port with tcpdump_" + color.END)
-	
-	if(op == 1): os.system('sudo tcpdump -s 0 -A port http')
-	elif(op == 2): os.system('sudo tcpdump -s 0 -A port http -i wlan0')
+	os.system('sudo tcpdump -s 0 -A port http' + op)
 
 """ Command: dump_https """
 def dump_https():
 	print("> " + color.YELLOW + "Analyse HTTPS Port with tcpdump_" + color.END)
-	
-	if(op == 1): os.system('sudo tcpdump -s 0 -A port https')
-	elif(op == 2): os.system('sudo tcpdump -s 0 -A port https -i wlan0')
+	os.system('sudo tcpdump -s 0 -A port https' + op)
 
 """ Command: dump_smtp """
 def dump_smtp():
 	print("> " + color.YELLOW + "Analyse SMTP Port with tcpdump_" + color.END)
-	
-	if(op == 1): os.system('sudo tcpdump -s 0 -A port smtp')
-	elif(op == 2): os.system('sudo tcpdump -s 0 -A port smtp -i wlan0')
+	os.system('sudo tcpdump -s 0 -A port smtp' + op)
 
 """ Command: dump_pop3 """
 def dump_pop3():
 	print("> " + color.YELLOW + "Analyse POP3 Port width tcpdump_" + color.END)
-	
-	if(op == 1): os.system('sudo tcpdump -s 0 -A port pop3')
-	elif(op == 2): os.system('sudo tcpdump -s 0 -A port pop3 -i wlan0')
+	os.system('sudo tcpdump -s 0 -A port pop3' + op)
 
 """ Command: Quit """
 def quit():
@@ -239,19 +225,19 @@ def quit():
 
 """ Selection des mods de lancement """
 def program():
-	print("> " + color.B_GREEN + "Launching_\n" + color.END + "> Please, select start mod:\n\n\t1. console mod\n\t2. graphique mod\n\t0. quit\n")
-	choice = input(">>> Mod: ")
-	
-	if(choice == 1): console()
-	elif(choice == 2): window()
-	elif(choice == 0):
-		print("> " + color.B_RED + "Quitting_" + color.END)
-		exit(1)
-	
-	else:
-		print("> " + color.B_YELLOW + "Uknown Mod_" + color.END)
-		program()
+	while(1):
+		print("> Please, select start mod:\n\n\t1. console mod\n\t2. graphique mod\n\t0. quit\n")
+		choice = input(">>> Mod: ")
+		
+		if(choice == 1): console()
+		elif(choice == 2): window()
+		elif(choice == 0):
+			print("> " + color.B_RED + "Quitting_" + color.END)
+			exit(1)
+		
+		else: print("> " + color.B_YELLOW + "Uknown Mod_" + color.END)
 
+print("> " + color.B_GREEN + "Launching_\n" + color.END)
 program()
 
 # -----
